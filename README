@@ -1,0 +1,10 @@
+Test en Javascript avec ou sans NodeJs,biblothèques.
+
+Prérequis:
+    NodeJS pour les Tests Unitaires
+
+formatter
+    test pour formatter des chaines de caracteres
+
+Lancer les tests:
+    ./node_modules/mocha/bin/mocha test_formatter
