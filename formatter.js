@@ -6,15 +6,28 @@
  * return texte if an error occurs
  * 
  * exemple "toto {0} ans." with [26,3,4] -> "toto a 26 ans"
- * 
+ * see test_formatter.js for more details
  */
 function formatString(texte,valeurs){
     var resultat=[];
     var indiceValeur;
     var indiceTexte=0;
     for(indiceTexte=0;indiceTexte<texte.length;indiceTexte++){
-        if(texte[indiceTexte]!='{'){
+        if(texte[indiceTexte]!='{' && texte[indiceTexte]!="'"){
             resultat.push(texte[indiceTexte]);
+        }else if(texte[indiceTexte]=="'"){
+            if(indiceTexte+1<texte.length && texte[indiceTexte+1]=="'"){
+                resultat.push("'");
+                indiceTexte++;
+            }else{
+                indiceTexte++;
+                var temp="";
+                while(indiceTexte<texte.length && texte[indiceTexte]!="'"){
+                    temp+=texte[indiceTexte];
+                    indiceTexte++;
+                }
+                resultat.push(temp);
+            }
         }else{
             indiceTexte++;
             indiceValeur="";

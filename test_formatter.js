@@ -23,5 +23,17 @@ describe('formatter', function() {
         it('bad index', function() {
             assert.equal("toto a {2} ans et a {1} chats !", formatter.formatString("toto a {2} ans et a {1} chats !",[26,3]));
         });
+        
+        it('return "toto a {0} ans et a {1} chats !"', function() {
+            assert.equal("toto a {0} ans et a {1} chats !", formatter.formatString("toto a '{0} ans et a {1} chats !",[26,3]));
+        });
+        
+        it('return "toto a {0} ans et a 3 chats !"', function() {
+            assert.equal("toto a {0} ans et a 3 chats !", formatter.formatString("toto a '{0} ans et' a {1} chats !",[26,3]));
+        });
+        
+        it('return "Voici l\'age de toto: 26 ans"', function() {
+            assert.equal("Voici l'age de toto: 26 ans", formatter.formatString("Voici l''age de toto: {0} ans",[26,3]));
+        });
     });
 });
