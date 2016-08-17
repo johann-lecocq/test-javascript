@@ -3,42 +3,42 @@
  * 
  * texte the string to format
  * valeurs values for replace in string
- * return null if an error occurs
+ * return texte if an error occurs
  * 
  * exemple "toto {0} ans." with [26,3,4] -> "toto a 26 ans"
  * 
  */
 function formatString(texte,valeurs){
-    var resultat="";
-    var indice_valeur;
-    var indice_texte=0;
-    for(indice_texte=0;indice_texte<texte.length;indice_texte++){
-        if(texte[indice_texte]!='{'){
-            resultat+=texte[indice_texte];
+    var resultat=[];
+    var indiceValeur;
+    var indiceTexte=0;
+    for(indiceTexte=0;indiceTexte<texte.length;indiceTexte++){
+        if(texte[indiceTexte]!='{'){
+            resultat.push(texte[indiceTexte]);
         }else{
-            indice_texte++;
-            indice_valeur="";
-            while(texte[indice_texte]!='}'){
-                if(isNaN(texte[indice_texte])){
+            indiceTexte++;
+            indiceValeur="";
+            while(texte[indiceTexte]!='}'){
+                if(isNaN(texte[indiceTexte])){
                     //console.error("error:the format is not correct");
-                    return null;
+                    return texte;
                 }
-                indice_valeur+=texte[indice_texte];
-                indice_texte++;
-                if(indice_texte>=texte.length){
+                indiceValeur+=texte[indiceTexte];
+                indiceTexte++;
+                if(indiceTexte>=texte.length){
                     //console.error("error:the string is incorrectly formatted");
-                    return null;
+                    return texte;
                 }
             }
-            indice_valeur=parseInt(indice_valeur,10);
-            if(indice_valeur>=valeurs.length){
-                //console.error("error:the index ["+indice_valeur+"] is invalid");
-                return null;
+            indiceValeur=parseInt(indiceValeur,10);
+            if(indiceValeur>=valeurs.length){
+                //console.error("error:the index ["+indiceValeur+"] is invalid");
+                return texte;
             }
-            resultat+=valeurs[indice_valeur];
+            resultat.push(valeurs[indiceValeur]);
         }
     }
-    return resultat;
+    return resultat.join("");
 }
 
 exports.formatString = formatString;
