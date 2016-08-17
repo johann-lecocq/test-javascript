@@ -54,4 +54,6 @@ function formatString(texte,valeurs){
     return resultat.join("");
 }
 
-exports.formatString = formatString;
+if(typeof exports !== 'undefined' && exports){
+    exports.formatString = formatString;
+}
